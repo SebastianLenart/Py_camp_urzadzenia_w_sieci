@@ -7,7 +7,7 @@ import subprocess
 # ip_address = "127.0.0.1"
 # output = subprocess.run(["ping", "-n", "1", ip_address], capture_output=True)
 # print(output.stdout)
-# print("unreachable" not in str(output.stdout)) # True
+# print("unreachable" not in str(output.stdout)) # True lub zamiast unreachable to "could not"
 
 
 # 2 sposob
