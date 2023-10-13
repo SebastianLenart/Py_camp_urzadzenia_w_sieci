@@ -1,7 +1,8 @@
 import netifaces
 
-from network import extract_ip_adress
+from network import extract_ip_adress, convert_mask2
 import netifaces
+import ipaddress
 from pprint import pprint
 
 
@@ -29,4 +30,33 @@ class NetworkInterfaces:
 
 ip = extract_ip_adress()
 network_interfaces = NetworkInterfaces()
-print(network_interfaces[ip])
+# print(network_interfaces[ip])
+mask = network_interfaces[ip]["netmask"]
+netmask_as_number = convert_mask2(mask)
+
+for address in ipaddress.IPv4Network(f"{ip}/{netmask_as_number}", strict=False):
+    print(address)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

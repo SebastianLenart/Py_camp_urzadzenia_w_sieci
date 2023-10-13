@@ -12,3 +12,14 @@ def extract_ip_adress():
         st.close()
     return local_ip
 
+
+def convert_mask(mask):
+    parts = mask.split(".")
+    mask = 0
+    for octet in parts:
+        mask += bin(int(octet)).count("1")
+    return mask
+
+
+def convert_mask2(mask):
+    return sum((bin(int(octet)).count("1") for octet in mask.split(".")))  # generator
