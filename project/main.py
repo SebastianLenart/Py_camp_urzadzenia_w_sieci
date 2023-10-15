@@ -1,6 +1,7 @@
 import netifaces
 
-from network import extract_ip_adress, convert_mask2
+from network import extract_ip_adress, convert_mask2, is_unreachable, is_unreachable2
+from network import is_reachable_with_ports
 import netifaces
 import ipaddress
 from pprint import pprint
@@ -34,10 +35,14 @@ network_interfaces = NetworkInterfaces()
 mask = network_interfaces[ip]["netmask"]
 netmask_as_number = convert_mask2(mask)
 
-for address in ipaddress.IPv4Network(f"{ip}/{netmask_as_number}", strict=False):
-    print(address)
-
-
+all_address = ipaddress.IPv4Network(f"{ip}/{netmask_as_number}", strict=False)
+for address in all_address.hosts(): # bez koncowki 255 i 0; to jest obiekt i trzeba na str
+    # print(address)
+    address = str(address)
+    # if is_unreachable2(address):
+    #     print(address)
+    if is_reachable_with_ports(address):
+        print(address)
 
 
 
